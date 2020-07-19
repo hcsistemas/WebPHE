@@ -1,0 +1,605 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="pheModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="CategoriasSet">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="descripcion" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CursosSet">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="titulo" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="id_modalidad" Type="int" Nullable="false" />
+          <Property Name="duracion" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="id_tipo_curso" Type="int" Nullable="false" />
+          <Property Name="id_categoria" Type="int" Nullable="false" />
+          <Property Name="id_linea_carrera" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="GeneroSet">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="descripcion" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LineasCarrerasSet">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="descripcion" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LugaresSet">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="descripcion" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ModalidadesSet">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="descripcion" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TipoCursosSet">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="descripcion" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Usuarios_CursosSet">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_usuario" Type="int" Nullable="false" />
+          <Property Name="id_curso" Type="int" Nullable="false" />
+          <Property Name="tipo_relacion" Type="smallint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UsuariosSet">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombres" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="apellidos" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="fec_nac" Type="datetime" Nullable="false" />
+          <Property Name="id_lug_nac" Type="int" Nullable="false" />
+          <Property Name="id_lug_res" Type="int" Nullable="false" />
+          <Property Name="id_genero" Type="int" Nullable="false" />
+          <Property Name="hobbies" Type="nvarchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Categorias">
+          <End Role="CategoriasSet" Type="Self.CategoriasSet" Multiplicity="1" />
+          <End Role="CursosSet" Type="Self.CursosSet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CategoriasSet">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="CursosSet">
+              <PropertyRef Name="id_categoria" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Curso_Usuario">
+          <End Role="CursosSet" Type="Self.CursosSet" Multiplicity="1" />
+          <End Role="Usuarios_CursosSet" Type="Self.Usuarios_CursosSet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CursosSet">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Usuarios_CursosSet">
+              <PropertyRef Name="id_curso" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LineasCarreras">
+          <End Role="LineasCarrerasSet" Type="Self.LineasCarrerasSet" Multiplicity="1" />
+          <End Role="CursosSet" Type="Self.CursosSet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LineasCarrerasSet">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="CursosSet">
+              <PropertyRef Name="id_linea_carrera" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Modalidades">
+          <End Role="ModalidadesSet" Type="Self.ModalidadesSet" Multiplicity="1" />
+          <End Role="CursosSet" Type="Self.CursosSet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ModalidadesSet">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="CursosSet">
+              <PropertyRef Name="id_modalidad" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TiposCursos">
+          <End Role="TipoCursosSet" Type="Self.TipoCursosSet" Multiplicity="1" />
+          <End Role="CursosSet" Type="Self.CursosSet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoCursosSet">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="CursosSet">
+              <PropertyRef Name="id_tipo_curso" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Usuario_Curso">
+          <End Role="UsuariosSet" Type="Self.UsuariosSet" Multiplicity="1" />
+          <End Role="Usuarios_CursosSet" Type="Self.Usuarios_CursosSet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UsuariosSet">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Usuarios_CursosSet">
+              <PropertyRef Name="id_usuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UsuarioGenero">
+          <End Role="GeneroSet" Type="Self.GeneroSet" Multiplicity="1" />
+          <End Role="UsuariosSet" Type="Self.UsuariosSet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GeneroSet">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="UsuariosSet">
+              <PropertyRef Name="id_genero" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UsuarioLugNac">
+          <End Role="LugaresSet" Type="Self.LugaresSet" Multiplicity="1" />
+          <End Role="UsuariosSet" Type="Self.UsuariosSet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LugaresSet">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="UsuariosSet">
+              <PropertyRef Name="id_lug_nac" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UsuariosLugRes">
+          <End Role="LugaresSet" Type="Self.LugaresSet" Multiplicity="1" />
+          <End Role="UsuariosSet" Type="Self.UsuariosSet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LugaresSet">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="UsuariosSet">
+              <PropertyRef Name="id_lug_res" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="pheModelStoreContainer">
+          <EntitySet Name="CategoriasSet" EntityType="Self.CategoriasSet" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CursosSet" EntityType="Self.CursosSet" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GeneroSet" EntityType="Self.GeneroSet" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LineasCarrerasSet" EntityType="Self.LineasCarrerasSet" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LugaresSet" EntityType="Self.LugaresSet" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ModalidadesSet" EntityType="Self.ModalidadesSet" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TipoCursosSet" EntityType="Self.TipoCursosSet" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Usuarios_CursosSet" EntityType="Self.Usuarios_CursosSet" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UsuariosSet" EntityType="Self.UsuariosSet" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Categorias" Association="Self.FK_Categorias">
+            <End Role="CategoriasSet" EntitySet="CategoriasSet" />
+            <End Role="CursosSet" EntitySet="CursosSet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Curso_Usuario" Association="Self.FK_Curso_Usuario">
+            <End Role="CursosSet" EntitySet="CursosSet" />
+            <End Role="Usuarios_CursosSet" EntitySet="Usuarios_CursosSet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LineasCarreras" Association="Self.FK_LineasCarreras">
+            <End Role="LineasCarrerasSet" EntitySet="LineasCarrerasSet" />
+            <End Role="CursosSet" EntitySet="CursosSet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Modalidades" Association="Self.FK_Modalidades">
+            <End Role="ModalidadesSet" EntitySet="ModalidadesSet" />
+            <End Role="CursosSet" EntitySet="CursosSet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TiposCursos" Association="Self.FK_TiposCursos">
+            <End Role="TipoCursosSet" EntitySet="TipoCursosSet" />
+            <End Role="CursosSet" EntitySet="CursosSet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Usuario_Curso" Association="Self.FK_Usuario_Curso">
+            <End Role="UsuariosSet" EntitySet="UsuariosSet" />
+            <End Role="Usuarios_CursosSet" EntitySet="Usuarios_CursosSet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UsuarioGenero" Association="Self.FK_UsuarioGenero">
+            <End Role="GeneroSet" EntitySet="GeneroSet" />
+            <End Role="UsuariosSet" EntitySet="UsuariosSet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UsuarioLugNac" Association="Self.FK_UsuarioLugNac">
+            <End Role="LugaresSet" EntitySet="LugaresSet" />
+            <End Role="UsuariosSet" EntitySet="UsuariosSet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UsuariosLugRes" Association="Self.FK_UsuariosLugRes">
+            <End Role="LugaresSet" EntitySet="LugaresSet" />
+            <End Role="UsuariosSet" EntitySet="UsuariosSet" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="pheModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="pheEntities" annotation:LazyLoadingEnabled="true" >
+          <EntitySet Name="UsuariosSet" EntityType="pheModel.Usuarios" />
+          <EntitySet Name="CursosSet" EntityType="pheModel.Cursos" />
+          <EntitySet Name="Usuarios_CursosSet" EntityType="pheModel.Usuarios_Cursos" />
+          <EntitySet Name="LugaresSet" EntityType="pheModel.Lugares" />
+          <EntitySet Name="GeneroSet" EntityType="pheModel.Genero" />
+          <EntitySet Name="ModalidadesSet" EntityType="pheModel.Modalidades" />
+          <EntitySet Name="TipoCursosSet" EntityType="pheModel.TipoCursos" />
+          <EntitySet Name="CategoriasSet" EntityType="pheModel.Categorias" />
+          <AssociationSet Name="FK_UsuarioGenero" Association="pheModel.FK_UsuarioGenero">
+            <End Role="Genero" EntitySet="GeneroSet" />
+            <End Role="Usuarios" EntitySet="UsuariosSet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UsuarioLugNac" Association="pheModel.FK_UsuarioLugNac">
+            <End Role="Lugares" EntitySet="LugaresSet" />
+            <End Role="Usuarios" EntitySet="UsuariosSet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UsuariosLugRes" Association="pheModel.FK_UsuariosLugRes">
+            <End Role="Lugares" EntitySet="LugaresSet" />
+            <End Role="Usuarios" EntitySet="UsuariosSet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Categorias" Association="pheModel.FK_Categorias">
+            <End Role="Categorias" EntitySet="CategoriasSet" />
+            <End Role="Cursos" EntitySet="CursosSet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Curso_Usuario" Association="pheModel.FK_Curso_Usuario">
+            <End Role="Cursos" EntitySet="CursosSet" />
+            <End Role="Usuarios_Cursos" EntitySet="Usuarios_CursosSet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Modalidades" Association="pheModel.FK_Modalidades">
+            <End Role="Modalidades" EntitySet="ModalidadesSet" />
+            <End Role="Cursos" EntitySet="CursosSet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TiposCursos" Association="pheModel.FK_TiposCursos">
+            <End Role="TipoCursos" EntitySet="TipoCursosSet" />
+            <End Role="Cursos" EntitySet="CursosSet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Usuario_Curso" Association="pheModel.FK_Usuario_Curso">
+            <End Role="Usuarios" EntitySet="UsuariosSet" />
+            <End Role="Usuarios_Cursos" EntitySet="Usuarios_CursosSet" />
+          </AssociationSet>
+          <EntitySet Name="LineasCarrerasSet" EntityType="pheModel.LineasCarreras" />
+          <AssociationSet Name="FK_LineasCarreras" Association="pheModel.FK_LineasCarreras">
+            <End Role="LineasCarreras" EntitySet="LineasCarrerasSet" />
+            <End Role="Cursos" EntitySet="CursosSet" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Usuarios">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombres" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="apellidos" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="fec_nac" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="id_lug_nac" Type="Int32" Nullable="false" />
+          <Property Name="id_lug_res" Type="Int32" Nullable="false" />
+          <Property Name="id_genero" Type="Int32" Nullable="false" />
+          <Property Name="hobbies" Type="String" Nullable="false" MaxLength="255" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="GeneroSet" Relationship="pheModel.FK_UsuarioGenero" FromRole="Usuarios" ToRole="Genero" />
+          <NavigationProperty Name="LugaresNacSet" Relationship="pheModel.FK_UsuarioLugNac" FromRole="Usuarios" ToRole="Lugares" />
+          <NavigationProperty Name="LugaresResSet" Relationship="pheModel.FK_UsuariosLugRes" FromRole="Usuarios" ToRole="Lugares" />
+          <NavigationProperty Name="Usuarios_CursosSet" Relationship="pheModel.FK_Usuario_Curso" FromRole="Usuarios" ToRole="Usuarios_Cursos" />
+        </EntityType>
+        <EntityType Name="Cursos">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="titulo" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
+          <Property Name="id_modalidad" Type="Int32" Nullable="false" />
+          <Property Name="duracion" Type="String" Nullable="false" Unicode="true" FixedLength="false" MaxLength="50" />
+          <Property Name="id_tipo_curso" Type="Int32" Nullable="false" />
+          <Property Name="id_categoria" Type="Int32" Nullable="false" />
+          <Property Name="id_linea_carrera" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="CategoriasSet" Relationship="pheModel.FK_Categorias" FromRole="Cursos" ToRole="Categorias" />
+          <NavigationProperty Name="Usuarios_CursosSet" Relationship="pheModel.FK_Curso_Usuario" FromRole="Cursos" ToRole="Usuarios_Cursos" />
+          <NavigationProperty Name="ModalidadesSet" Relationship="pheModel.FK_Modalidades" FromRole="Cursos" ToRole="Modalidades" />
+          <NavigationProperty Name="TipoCursosSet" Relationship="pheModel.FK_TiposCursos" FromRole="Cursos" ToRole="TipoCursos" />
+          <NavigationProperty Name="LineasCarrerasSet" Relationship="pheModel.FK_LineasCarreras" FromRole="Cursos" ToRole="LineasCarreras" />
+        </EntityType>
+        <EntityType Name="Usuarios_Cursos">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_usuario" Type="Int32" Nullable="false" />
+          <Property Name="id_curso" Type="Int32" Nullable="false" />
+          <Property Name="tipo_relacion" Type="Int16" Nullable="false" />
+          <NavigationProperty Name="CursosSet" Relationship="pheModel.FK_Curso_Usuario" FromRole="Usuarios_Cursos" ToRole="Cursos" />
+          <NavigationProperty Name="UsuariosSet" Relationship="pheModel.FK_Usuario_Curso" FromRole="Usuarios_Cursos" ToRole="Usuarios" />
+        </EntityType>
+        <EntityType Name="Lugares">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="descripcion" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="UsuariosSet" Relationship="pheModel.FK_UsuarioLugNac" FromRole="Lugares" ToRole="Usuarios" />
+          <NavigationProperty Name="UsuariosSet1" Relationship="pheModel.FK_UsuariosLugRes" FromRole="Lugares" ToRole="Usuarios" />
+        </EntityType>
+        <EntityType Name="Genero">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="descripcion" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="UsuariosSet" Relationship="pheModel.FK_UsuarioGenero" FromRole="Genero" ToRole="Usuarios" />
+        </EntityType>
+        <EntityType Name="Modalidades">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="descripcion" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="CursosSet" Relationship="pheModel.FK_Modalidades" FromRole="Modalidades" ToRole="Cursos" />
+        </EntityType>
+        <EntityType Name="TipoCursos">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="descripcion" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="CursosSet" Relationship="pheModel.FK_TiposCursos" FromRole="TipoCursos" ToRole="Cursos" />
+        </EntityType>
+        <EntityType Name="Categorias">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="descripcion" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="CursosSet" Relationship="pheModel.FK_Categorias" FromRole="Categorias" ToRole="Cursos" />
+        </EntityType>
+        <Association Name="FK_UsuarioGenero">
+          <End Type="pheModel.Genero" Role="Genero" Multiplicity="1" />
+          <End Type="pheModel.Usuarios" Role="Usuarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Genero">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Usuarios">
+              <PropertyRef Name="id_genero" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UsuarioLugNac">
+          <End Type="pheModel.Lugares" Role="Lugares" Multiplicity="1" />
+          <End Type="pheModel.Usuarios" Role="Usuarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Lugares">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Usuarios">
+              <PropertyRef Name="id_lug_nac" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UsuariosLugRes">
+          <End Type="pheModel.Lugares" Role="Lugares" Multiplicity="1" />
+          <End Type="pheModel.Usuarios" Role="Usuarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Lugares">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Usuarios">
+              <PropertyRef Name="id_lug_res" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Categorias">
+          <End Type="pheModel.Categorias" Role="Categorias" Multiplicity="1" />
+          <End Type="pheModel.Cursos" Role="Cursos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categorias">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Cursos">
+              <PropertyRef Name="id_categoria" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Curso_Usuario">
+          <End Type="pheModel.Cursos" Role="Cursos" Multiplicity="1" />
+          <End Type="pheModel.Usuarios_Cursos" Role="Usuarios_Cursos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cursos">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Usuarios_Cursos">
+              <PropertyRef Name="id_curso" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Modalidades">
+          <End Type="pheModel.Modalidades" Role="Modalidades" Multiplicity="1" />
+          <End Type="pheModel.Cursos" Role="Cursos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Modalidades">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Cursos">
+              <PropertyRef Name="id_modalidad" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TiposCursos">
+          <End Type="pheModel.TipoCursos" Role="TipoCursos" Multiplicity="1" />
+          <End Type="pheModel.Cursos" Role="Cursos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoCursos">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Cursos">
+              <PropertyRef Name="id_tipo_curso" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Usuario_Curso">
+          <End Type="pheModel.Usuarios" Role="Usuarios" Multiplicity="1" />
+          <End Type="pheModel.Usuarios_Cursos" Role="Usuarios_Cursos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuarios">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Usuarios_Cursos">
+              <PropertyRef Name="id_usuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="LineasCarreras">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="descripcion" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="CursosSet" Relationship="pheModel.FK_LineasCarreras" FromRole="LineasCarreras" ToRole="Cursos" />
+        </EntityType>
+        <Association Name="FK_LineasCarreras">
+          <End Type="pheModel.LineasCarreras" Role="LineasCarreras" Multiplicity="1" />
+          <End Type="pheModel.Cursos" Role="Cursos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LineasCarreras">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Cursos">
+              <PropertyRef Name="id_linea_carrera" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="pheModelStoreContainer" CdmEntityContainer="pheEntities">
+    <EntitySetMapping Name="UsuariosSet">
+      <EntityTypeMapping TypeName="IsTypeOf(pheModel.Usuarios)">
+        <MappingFragment StoreEntitySet="UsuariosSet">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="nombres" ColumnName="nombres" />
+          <ScalarProperty Name="apellidos" ColumnName="apellidos" />
+          <ScalarProperty Name="fec_nac" ColumnName="fec_nac" />
+          <ScalarProperty Name="id_lug_nac" ColumnName="id_lug_nac" />
+          <ScalarProperty Name="id_lug_res" ColumnName="id_lug_res" />
+          <ScalarProperty Name="id_genero" ColumnName="id_genero" />
+          <ScalarProperty Name="hobbies" ColumnName="hobbies" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CursosSet">
+      <EntityTypeMapping TypeName="IsTypeOf(pheModel.Cursos)">
+        <MappingFragment StoreEntitySet="CursosSet">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="titulo" ColumnName="titulo" />
+          <ScalarProperty Name="id_modalidad" ColumnName="id_modalidad" />
+          <ScalarProperty Name="duracion" ColumnName="duracion" />
+          <ScalarProperty Name="id_tipo_curso" ColumnName="id_tipo_curso" />
+          <ScalarProperty Name="id_categoria" ColumnName="id_categoria" />
+          <ScalarProperty Name="id_linea_carrera" ColumnName="id_linea_carrera" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Usuarios_CursosSet">
+      <EntityTypeMapping TypeName="IsTypeOf(pheModel.Usuarios_Cursos)">
+        <MappingFragment StoreEntitySet="Usuarios_CursosSet">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="id_usuario" ColumnName="id_usuario" />
+          <ScalarProperty Name="id_curso" ColumnName="id_curso" />
+          <ScalarProperty Name="tipo_relacion" ColumnName="tipo_relacion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="LugaresSet">
+      <EntityTypeMapping TypeName="IsTypeOf(pheModel.Lugares)">
+        <MappingFragment StoreEntitySet="LugaresSet">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="GeneroSet">
+      <EntityTypeMapping TypeName="IsTypeOf(pheModel.Genero)">
+        <MappingFragment StoreEntitySet="GeneroSet">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ModalidadesSet">
+      <EntityTypeMapping TypeName="IsTypeOf(pheModel.Modalidades)">
+        <MappingFragment StoreEntitySet="ModalidadesSet">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TipoCursosSet">
+      <EntityTypeMapping TypeName="IsTypeOf(pheModel.TipoCursos)">
+        <MappingFragment StoreEntitySet="TipoCursosSet">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CategoriasSet">
+      <EntityTypeMapping TypeName="IsTypeOf(pheModel.Categorias)">
+        <MappingFragment StoreEntitySet="CategoriasSet">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="LineasCarrerasSet">
+      <EntityTypeMapping TypeName="IsTypeOf(pheModel.LineasCarreras)">
+        <MappingFragment StoreEntitySet="LineasCarrerasSet">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

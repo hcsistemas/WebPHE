@@ -1,0 +1,154 @@
+﻿@model IEnumerable<WebPHE.Models.Cursos>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<style>
+    .tit-reporte {
+        font-size: 1.8em;
+        font-weight: 500;
+    }
+
+    #reporte tr th, #reporte tr td {
+        text-align: center;
+    }
+
+    th, td {
+        padding: 10px 0 5px;
+        border-top: solid 1px #337ab7;
+    }
+
+    .head {
+        font-size: 1.2em;
+        font-weight: 500;
+        padding: 10px 0 5px;
+        border-top: solid 1px #337ab7;
+        text-align: center !important;
+        background-color: #009e9e;
+        color: #fff;
+    }
+</style>
+
+<br />
+<div class="">
+    <h2>Reportes</h2>
+</div>
+<br />
+<div class="row">
+
+    <div class="col-md-2">
+        @Html.ActionLink("Listado Cursos", "Index", new { secc = "rep-cursos" }, new { @class = "btn btn-warning btn-block" })
+        @Html.ActionLink("Usuarios por Edad", "Index", new { secc = "rep-clasif-edad" }, new { @class = "btn btn-warning btn-block" })
+        @Html.ActionLink("Usuarios por Genero", "Index", new { secc = "rep-clasif-genero" }, new { @class = "btn btn-warning btn-block" })
+    </div>
+    <div class="col-md-10">
+        @if (ViewBag.Reporte == "rep-clasif-edad")
+        {
+            <div class="tit-reporte">
+                Clasificación de Usuarios por Rango de Edad
+            </div>
+            <br />
+            <table id="reporte" style="width:50%; border-bottom:solid 1px #337ab7;">
+                <tr>
+                    <th class="head">Rango de Edad</th>
+                    <th class="head">Cantidad de Usuarios</th>
+                </tr>
+                @foreach (var rango in ViewBag.Rangos)
+                {
+                    <tr>
+                        <th>@(rango.Descripcion)</th>
+                        <td>@(rango.Cantidad)</td>
+                    </tr>
+                }
+            </table>
+        }
+
+        @if (ViewBag.Reporte == "rep-clasif-genero")
+        {
+            <div class="tit-reporte">
+                Clasificación de Usuarios por Genero
+            </div>
+            <br />
+            <table id="reporte" style="width:50%; border-bottom:solid 1px #337ab7;">
+                <tr>
+                    <th class="head">Genero</th>
+                    <th class="head">Cantidad de Usuarios</th>
+                </tr>
+                @foreach (var genero in ViewBag.Generos)
+                {
+                    <tr>
+                        <th>@(genero.Descripcion)</th>
+                        <td>@(genero.Cantidad)</td>
+                    </tr>
+                }
+            </table>
+        }
+
+        @if (ViewBag.Reporte == "rep-cursos")
+        {
+            <div class="tit-reporte">
+                Listado de Cursos
+            </div>
+            <br />
+            <table class="table">
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.titulo)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.duracion)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.CategoriasSet.descripcion)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ModalidadesSet.descripcion)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.TipoCursosSet.descripcion)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.LineasCarrerasSet.descripcion)
+                    </th>
+                    <th></th>
+                </tr>
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.titulo)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.duracion)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CategoriasSet.descripcion)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ModalidadesSet.descripcion)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.TipoCursosSet.descripcion)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.LineasCarrerasSet.descripcion)
+                        </td>
+                        <!--
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.id }) |
+                        @Html.ActionLink("Details", "Details", new { id = item.id }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.id })
+                    </td>
+                    -->
+                    </tr>
+                }
+
+            </table>
+        }
+    </div>
+</div>
+
+
+

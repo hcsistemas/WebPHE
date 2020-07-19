@@ -1,0 +1,23 @@
+﻿<style>
+    img { margin: auto; width: 100%; }
+    .btn { border-radius: 0 !important; }
+    .p-0 { padding: 0; }
+</style>
+
+<div class="jumbotron">
+    <div class="container">
+        <div class="row" style="margin-bottom:0;">
+            <div class="col-sm-4 col-md-3 p-0" style="margin-bottom:0;">
+                @Html.ActionLink("Registro de usuarios", "Index", "Usuarios", new { area = "" }, new { @class = "btn btn-warning btn-block btn-lg" })
+            </div>
+            <div class="col-sm-4 col-md-3 p-0" style="margin-bottom:0;">
+                @Html.ActionLink("Reportes", "Index", "Reportes", new { area = "" }, new { @class = "btn btn-warning btn-block btn-lg" })
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 p-0">
+                <img class="img-responsive" src="~/images/banner-ppal.png" alt="banner" />
+            </div>
+        </div>
+    </div>
+</div>

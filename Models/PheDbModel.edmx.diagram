@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="d9bd903bc4d4442b95e54a7470e337f6" Name="Diagram1" >
+        <EntityTypeShape EntityType="pheModel.Usuarios" Width="1.5" PointX="3.375" PointY="0.5" />
+        <EntityTypeShape EntityType="pheModel.Cursos" Width="1.5" PointX="3.375" PointY="4" />
+        <EntityTypeShape EntityType="pheModel.Usuarios_Cursos" Width="1.5" PointX="0.75" PointY="2.75" />
+        <EntityTypeShape EntityType="pheModel.Lugares" Width="1.5" PointX="5.875" PointY="0.5" />
+        <EntityTypeShape EntityType="pheModel.Genero" Width="1.5" PointX="7.75" PointY="0.5" />
+        <EntityTypeShape EntityType="pheModel.Modalidades" Width="1.5" PointX="5.875" PointY="4" />
+        <EntityTypeShape EntityType="pheModel.TipoCursos" Width="1.5" PointX="7.75" PointY="4" />
+        <EntityTypeShape EntityType="pheModel.Categorias" Width="1.5" PointX="9.625" PointY="4" />
+        <AssociationConnector Association="pheModel.FK_UsuarioGenero" />
+        <AssociationConnector Association="pheModel.FK_UsuarioLugNac" />
+        <AssociationConnector Association="pheModel.FK_UsuariosLugRes" />
+        <AssociationConnector Association="pheModel.FK_Categorias" />
+        <AssociationConnector Association="pheModel.FK_Curso_Usuario" />
+        <AssociationConnector Association="pheModel.FK_Modalidades" />
+        <AssociationConnector Association="pheModel.FK_TiposCursos" />
+        <AssociationConnector Association="pheModel.FK_Usuario_Curso" />
+        <EntityTypeShape EntityType="pheModel.LineasCarreras" Width="1.5" PointX="11.5" PointY="4" />
+        <AssociationConnector Association="pheModel.FK_LineasCarreras" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

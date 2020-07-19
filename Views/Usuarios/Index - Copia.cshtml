@@ -1,0 +1,74 @@
+﻿@model IEnumerable<WebPHE.Models.Usuarios>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<br />
+<div class="text-center">
+    <h2>Listado de Usuarios</h2>
+</div>
+<br />
+<p>
+    @Html.ActionLink("Registrar Usuario", "Create", null, null, new { @class = "btn btn-primary" })
+</p>
+<br />
+<table class="table table-striped">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.nombres)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.apellidos)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.fec_nac)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.id_lug_nac)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.id_lug_res)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.id_genero)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.hobbies)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.nombres)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.apellidos)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.fec_nac)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LugaresNacSet.descripcion)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LugaresResSet.descripcion)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GeneroSet.descripcion)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.hobbies)
+            </td>
+            <td>
+                @Html.ActionLink("Editar", "Edit", new { id = item.id }, new { @class = "label label-default" }) |
+                @Html.ActionLink("Detalles", "Details", new { id = item.id }, new { @class = "label label-info" }) |
+                @Html.ActionLink("Borrar", "Delete", new { id = item.id }, new { @class = "label label-danger", @onclick = "return confirm('Esta seguro que desea eliminar este registro?')" })
+            </td>
+        </tr>
+    }
+
+</table>

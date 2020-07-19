@@ -1,0 +1,72 @@
+﻿@model WebPHE.Models.Cursos
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Cursos</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.titulo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.titulo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.duracion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.duracion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CategoriasSet.descripcion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CategoriasSet.descripcion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ModalidadesSet.descripcion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ModalidadesSet.descripcion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TipoCursosSet.descripcion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TipoCursosSet.descripcion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LineasCarrerasSet.descripcion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LineasCarrerasSet.descripcion)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

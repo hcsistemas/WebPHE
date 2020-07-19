@@ -1,0 +1,66 @@
+﻿@model WebPHE.Models.Cursos
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Cursos</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.titulo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.titulo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.duracion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.duracion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CategoriasSet.descripcion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CategoriasSet.descripcion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ModalidadesSet.descripcion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ModalidadesSet.descripcion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TipoCursosSet.descripcion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TipoCursosSet.descripcion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LineasCarrerasSet.descripcion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LineasCarrerasSet.descripcion)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

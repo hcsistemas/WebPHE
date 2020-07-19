@@ -1,0 +1,71 @@
+﻿@{
+    ViewBag.Title = "Details";
+}
+
+<style>
+    dt, dd {
+        padding: 10px 0 5px;
+        border-top: solid 1px #337ab7;
+    }
+</style>
+
+<div>
+
+    @foreach (var user in Model)
+    {
+        <br />
+        <div class="">
+            <h2>Detalles de @user.Nombres @user.Apellidos</h2>
+        </div>
+        <br />
+        <dl class="dl-horizontal">
+            <dt>
+                Fecha de Nacimiento:
+            </dt>
+
+            <dd>
+                @user.FechaNac
+            </dd>
+
+            <dt>
+                Lugar de Nacimiento:
+            </dt>
+
+            <dd>
+
+                @user.LugarNac
+            </dd>
+
+            <dt>
+                Lugar de Residencia:
+            </dt>
+
+            <dd>
+
+                @user.LugarRes
+            </dd>
+
+            <dt>
+                Genero:
+            </dt>
+
+            <dd>
+
+                @user.Genero
+            </dd>
+
+            <dt>
+                Hobbies:
+            </dt>
+
+            <dd>
+
+                @user.Hoobies
+            </dd>
+        </dl>
+
+        }
+</div>
+<p>
+    @Html.ActionLink("Regresar", "Index", null, new { @class = "btn btn-info" })
+</p>

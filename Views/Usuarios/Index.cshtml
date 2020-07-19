@@ -1,0 +1,72 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+
+<br />
+<div class="text-center">
+    <h2>Listado de Usuarios</h2>
+</div>
+<br />
+<p>
+    @Html.ActionLink("Registrar Usuario", "Create", null, null, new { @class = "btn btn-primary" })
+</p>
+<br />
+<table class="table table-striped">
+    <tr>
+        <th>
+            Nombres
+        </th>
+        <th>
+            Apellidos
+        </th>
+        <th>
+            Fecha de Nacimiento
+        </th>
+        <th>
+            Lugar de Nacimeinto
+        </th>
+        <th>
+            Lugar de Residencia
+        </th>
+        <th>
+            Genero
+        </th>
+        <th>
+            Hobbies
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var user in Model)
+    {
+        <tr>
+            <td>
+                @user.Nombres
+            </td>
+            <td>
+                @user.Apellidos
+            </td>
+            <td>
+                @user.FechaNac
+            </td>
+            <td>
+                @user.LugarNac
+            </td>
+            <td>
+                @user.LugarRes
+            </td>
+            <td>
+                @user.Genero
+            </td>
+            <td>
+                @user.Hoobies
+            </td>
+            <td>
+                @Html.ActionLink("Editar", "Edit", new { id = user.Id }, new { @class = "label label-default" }) |
+                @Html.ActionLink("Detalles", "Details", new { id = user.Id }, new { @class = "label label-info" }) |
+                @Html.ActionLink("Borrar", "Delete", new { id = user.Id }, new { @class = "label label-danger", @onclick = "return confirm('Esta seguro que desea eliminar este registro?')" })
+            </td>
+        </tr>
+    }
+
+</table>
