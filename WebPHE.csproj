@@ -302,7 +302,6 @@
     <Content Include="Views\Reportes\Details.cshtml" />
     <Content Include="Views\Reportes\Edit.cshtml" />
     <Content Include="Views\Reportes\Index.cshtml" />
-    <Content Include="Views\Usuarios\Index - Copia.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
